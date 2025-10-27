@@ -1,4 +1,4 @@
-name: CI/CD - Next.js
+name: CI/CD - Next.js (Personal Account)
 
 on:
   push:
@@ -7,7 +7,7 @@ on:
     branches: [main]
 
 jobs:
-  build-and-deploy:
+  build:
     runs-on: ubuntu-latest
 
     steps:
@@ -26,23 +26,63 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      # 4️⃣ Lint та тести
+      # 4️⃣ Lint коду
       - name: Lint code
         run: npm run lint --if-present
 
+      # 5️⃣ Запуск тестів
       - name: Run tests
         run: npm test --if-present
 
-      # 5️⃣ Build Next.js
+      # 6️⃣ Build Next.js
       - name: Build project
         run: npm run build
 
-      # 6️⃣ Деплой на Vercel (prod)
-      - name: Deploy to Vercel
-        env:
-          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
-          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
-          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
-        run: |
-          npm install -g vercel
-          vercel --prod --confirm --token $VERCEL_TOKEN --scope $VERCEL_ORG_ID --project $VERCEL_PROJECT_ID
+#name: CI/CD - Next.js
+#
+#on:
+#  push:
+#    branches: [main]
+#  pull_request:
+#    branches: [main]
+#
+#jobs:
+#  build-and-deploy:
+#    runs-on: ubuntu-latest
+#
+#    steps:
+#      # 1️⃣ Клонування репозиторію
+#      - name: Checkout repository
+#        uses: actions/checkout@v4
+#
+#      # 2️⃣ Встановлення Node.js та кешування npm
+#      - name: Setup Node.js
+#        uses: actions/setup-node@v4
+#        with:
+#          node-version: 20
+#          cache: 'npm'
+#
+#      # 3️⃣ Встановлення залежностей
+#      - name: Install dependencies
+#        run: npm ci
+#
+#      # 4️⃣ Lint та тести
+#      - name: Lint code
+#        run: npm run lint --if-present
+#
+#      - name: Run tests
+#        run: npm test --if-present
+#
+#      # 5️⃣ Build Next.js
+#      - name: Build project
+#        run: npm run build
+#
+#      # 6️⃣ Деплой на Vercel (prod)
+#      - name: Deploy to Vercel
+#        env:
+#          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+#          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+#          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+#        run: |
+#          npm install -g vercel
+#          vercel --prod --confirm --token $VERCEL_TOKEN --scope $VERCEL_ORG_ID --project $VERCEL_PROJECT_ID
