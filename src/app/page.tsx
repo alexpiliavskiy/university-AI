@@ -9,6 +9,12 @@ export default function Home() {
         dicta dignissimos in minima necessitatibus nemo nobis quod veritatis.
         Explicabo, nobis?
       </p>
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium ad
+        culpa cum dolor dolorem excepturi explicabo harum hic incidunt
+        laboriosam maxime molestias nesciunt obcaecati praesentium quae quidem
+        repellat veritatis, vitae?
+      </p>
     </div>
   );
 }
